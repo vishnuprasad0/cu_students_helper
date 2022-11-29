@@ -79,6 +79,10 @@ def viewstudent ( ) :
 
 @app.route ( '/addmaterial' )
 def addmaterial ( ) :
+<<<<<<< HEAD
+=======
+    return render_template('TEACHER/TEACHER REGISTRATION.HTML')
+>>>>>>> 80ee0ed (changed to new repo-added base structure)
     material = request.form [ 'file' ]
 
     qry = "insert into `materials` "
@@ -92,7 +96,11 @@ def teacherhome ( ) :
     return render_template ( 'TEACHER/TEACHER HOME.html' )
 
 
+<<<<<<< HEAD
 @app.route ( '/teacherregistration' )
+=======
+@app.route ( '/teacherregistration')
+>>>>>>> 80ee0ed (changed to new repo-added base structure)
 def teacherregistration ( ) :
     return render_template ( 'TEACHER/TEACHER REGISTRATION.html' )
 
