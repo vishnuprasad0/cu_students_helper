@@ -1,13 +1,14 @@
 import requests
 from flask import *
 from dbconnectionnew import *
-
+import os
+from werkzeug.utils import  secure_filename
 app = Flask ( __name__ )
-
+app.secret_key ='123'
 
 @app.route ( '/' )
 def login ( ) :
-    return render_template ( 'login.html' )
+    return render_template ( 'index.html' )
 
 
 @app.route ( '/login_post' , methods = [ 'post' ] )
@@ -20,14 +21,17 @@ def login_post ( ) :
     if res is None :
         return '''<script>alert("invalid username or password");window.location='/'</script>'''
     elif res [ 'TYPE' ] == "admin" :
+        session['lid']=res['LOGIN_ID']
         return '''<script>alert("Welcome admin");window.location='/adminhome'</script>'''
     elif res [ 'TYPE' ] == "teacher" :
+        session['lid'] = res['LOGIN_ID']
         return '''<script>alert("Welcome teacher");window.location='/teacherhome'</script>'''
     else :
         return '''<script>alert("Invalid user");window.location='/'</script>'''
 
 
-# =================================ADMIN================================================
+# =================================    ADMIN    ================================================
+# ==============================================================================================
 
 @app.route ( '/adminhome' )
 def adminhome ( ) :
@@ -36,10 +40,26 @@ def adminhome ( ) :
 
 @app.route ( '/verifymaterial' )
 def verifymaterial ( ) :
-    return render_template ( 'ADMIN/VERIFY MATERIAL.html' )
+    qry="select * from materials";
+    res= selectall(qry)
+    return render_template( 'ADMIN/VERIFY MATERIAL.html',val=res )
+
+@app.route('/accept')
+def accept():
+    id=request.args.get('id')
+    qry="UPDATE `materials` SET `STATUS`='accepted' WHERE `M_ID`=%s"
+    iud(qry,id)
+    return '''<script>alert("accepted");window.location='verifymaterial'</script>'''
+
+@app.route('/reject')
+def reject():
+    id = request.args.get('id')
+    qry = "delete from `materials` WHERE `M_ID`=%s"
+    iud(qry,id)
+    return '''<script>alert("rejected");window.location='verifymaterial'</script>'''
 
 
-@app.route ( '/viewfeedback' )
+@app.route('/viewfeedback' )
 def viewfeedback ( ) :
     qry = "select * from feedbacks;"
     res = selectall ( qry )
@@ -50,7 +70,7 @@ def viewfeedback ( ) :
 def viewmaterial ( ) :
     qry = "select * from materials;"
     res = selectall ( qry )
-    return render_template ( 'ADMIN/VIEW MATERIAL.html' , val = res )
+    return render_template ( 'TEACHER/VIEW MATERIAL.html' , val = res )
 
 
 @app.route ( '/viewnotification' )
@@ -74,21 +94,22 @@ def viewstudent ( ) :
     return render_template ( 'ADMIN/VIEW STUDENT.html' , val = res )
 
 
-# ===========================TEACHER=====================================================
-
+# ========================================   TEACHER    ===================================================
+# =========================================================================================================
 
 @app.route ( '/addmaterial' )
 def addmaterial ( ) :
-<<<<<<< HEAD
-=======
-    return render_template('TEACHER/TEACHER REGISTRATION.HTML')
->>>>>>> 80ee0ed (changed to new repo-added base structure)
-    material = request.form [ 'file' ]
-
-    qry = "insert into `materials` "
-    val = (material)
-    res = iud ( qry , val )
-    return '''<script>alert("Added successfully ")</script>'''
+    return render_template('TEACHER/ADD MATERIAL.html')
+@app.route('/addmaterial1', methods=['post'])
+def addmaterial1():
+        material = request.files [ 'file' ]
+        filename=secure_filename(material.filename)
+        material.save(os.path.join('static/upload',filename))
+        subjectname=request.form['subjectname']
+        qry = "INSERT INTO `materials` VALUES(null,%s,%s,CURDATE(),%s,'pending')"
+        val = (session['lid'],filename,subjectname)
+        res = iud ( qry , val )
+        return '''<script>alert("Added successfully ");window.location="/addmaterial"</script>'''
 
 
 @app.route ( '/teacherhome' )
@@ -96,13 +117,9 @@ def teacherhome ( ) :
     return render_template ( 'TEACHER/TEACHER HOME.html' )
 
 
-<<<<<<< HEAD
 @app.route ( '/teacherregistration' )
-=======
-@app.route ( '/teacherregistration')
->>>>>>> 80ee0ed (changed to new repo-added base structure)
 def teacherregistration ( ) :
-    return render_template ( 'TEACHER/TEACHER REGISTRATION.html' )
+    return render_template ( 'TEACHER/REGISTRATION index.html' )
 
 
 @app.route ( '/teacherregistration_post' , methods = [ 'post' ] )
@@ -124,16 +141,14 @@ def teacherregistration_post ( ) :
 
     qry = "INSERT INTO login ( USERNAME , PASSWORD , `TYPE` ) VALUES (%s ,%s,'teacher')"
     val = (username , password)
-    iud(qry, val)
+    iud ( qry , val )
 
-    qry = "INSERT INTO teachers(first_name, last_name, qualifcation, gender, dob, department, college, email_id, " \
+    qry = "INSERT INTO teachers(first_name, last_name, qualification, gender, dob, department, college, email_id, " \
           "mobile_no, PLACE, POST_OFFICE, pin_code) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) "
 
     val = (first_name , last_name , qualifcation , gender , dob , department , college , email_id , mobile_no , place ,
            post_office , pin_code)
     res = iud ( qry , val )
-
-
     return '''<script>alert(" you're registered successfully ");window.location="/"</script>'''
 
 

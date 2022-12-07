@@ -1,25 +1,96 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<head>-->
+
+{% extends 'ADMIN/ADMIN INDEX.html' %}
+{% block body %}
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Untitled Document</title>
+<title>verify material</title>
 </head>
 
 <body>
-<form id="form1" name="form1" method="post" action="/verifymaterial">
-  <table  border="1">
+<h3>Verify Material</h3>
+<form id="form1" name="form1" style="background-color:white;" method="post" action="/verifymaterial">
+  <table border="0"  style="color:black;" >
+    <style>
+      button {
+ width: 100px;
+ height: 25px;
+ cursor: pointer;
+ display: flex;
+ align-items: center;
+ background: red;
+ border: none;
+ border-radius: 5px;
+ box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+ background: #e62222;
+}
+
+button, button span {
+ transition: 200ms;
+}
+
+button .text {
+ transform: translateX(35px);
+ color: white;
+ font-weight: bold;
+}
+
+button .icon {
+ position: absolute;
+ border-left: 1px solid #c41b1b;
+ transform: translateX(110px);
+ height: 20px;
+ width: 20px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+button svg {
+ width: 10px;
+ fill: #eee;
+}
+
+button:hover {
+ background: #ff3636;
+}
+
+button:hover .text {
+ color: transparent;
+}
+
+button:hover .icon {
+ width: 80px;
+ border-left: none;
+ transform: translateX(0);
+}
+
+button:focus {
+ outline: none;
+}
+
+button:active .icon svg {
+ transform: scale(0.4);
+}
+    </style>
     <tr>
-      <th scope="col">&nbsp;</th>
-      <th scope="col">MATERIAL NAME </th>
-      <th scope="col">DATE</th>
-      <th scope="col">COURSE/PAPER NAME </th>
-      <th scope="col">STATUS</th>
+
+      <th>MATERIAL NAME </th>
+      <th>DATE</th>>
+      <th> COURSE/PAPER NAME </th>
+      <th>STATUS</th>
     </tr>
+    {% for i in val  %}
     <tr>
-      <td><p><a href="#">ACCEPT</a></p>
-      <p><a href="#">REJECT</a></p></td>
+    <td><a style="color:blue;" href="static/upload/{{i['MATERIAL']}}">{{i['MATERIAL']}}</a></td>
+    <td>{{i['DATE']}}</td>
+    <td>{{i['SUBJECT_NAME']}}</td>
+    <td>{% if i['STATUS']=='pending'%}<a style="color:green" href="accept?id={{i['M_ID']}}">accept✅</a><br><a style="color:red" href="reject?id={{i['M_ID']}}">reject ❌</a>{% elif i['STATUS']=='accepted'%} accepted{% endif %}</td>
     </tr>
+       {% endfor %}
   </table>
+
 </form>
 </body>
-</html>
+{% endblock %}
