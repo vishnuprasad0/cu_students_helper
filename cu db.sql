@@ -27,17 +27,25 @@ CREATE TABLE `feedbacks` (
   `NAME` varchar(30) DEFAULT NULL,
   `DATE` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`FEEDBACK_ID`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+>>>>>>> origin/master
 
 /*Data for the table `feedbacks` */
 
 insert  into `feedbacks`(`FEEDBACK_ID`,`USER_ID`,`FEEDBACK`,`NAME`,`DATE`) values 
+<<<<<<< HEAD
 (1,0,'test','test','test'),
 (2,1,'ggggggggggg',NULL,'2023-01-07'),
 (3,1,'aaaaaaa',NULL,'2023-01-07'),
 (4,1,'feedback senteddd',NULL,'2023-01-13'),
 (5,1,'wooden',NULL,'2023-01-14'),
 (6,1,'wig fghdhdjjhhdhhdddhggddifrjcjevkdv',NULL,'2023-01-14');
+=======
+(1,0,'test','test','test');
+>>>>>>> origin/master
 
 /*Table structure for table `login` */
 
@@ -49,13 +57,18 @@ CREATE TABLE `login` (
   `PASSWORD` varchar(50) DEFAULT NULL,
   `TYPE` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`LOGIN_ID`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=latin1;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+>>>>>>> origin/master
 
 /*Data for the table `login` */
 
 insert  into `login`(`LOGIN_ID`,`USERNAME`,`PASSWORD`,`TYPE`) values 
 (1,'admin','admin','admin'),
 (2,'t','t','teacher'),
+<<<<<<< HEAD
 (3,'s','s','student'),
 (4,'d','d','student'),
 (5,'ammu','ammu','teacher'),
@@ -65,6 +78,16 @@ insert  into `login`(`LOGIN_ID`,`USERNAME`,`PASSWORD`,`TYPE`) values
 (11,'ammu','123','teacher'),
 (102,'rahul','rahul','student'),
 (103,'g','g','student');
+=======
+(3,'ammu','ammu','teacher'),
+(4,'ammu','ammu','teacher'),
+(5,'ammu','ammu','teacher'),
+(6,'ammu','ammu','teacher'),
+(7,'ammu','ammu','teacher'),
+(8,'ammu','cfc','teacher'),
+(9,'ammu','cfc','teacher'),
+(10,'ammu','ammu','teacher');
+>>>>>>> origin/master
 
 /*Table structure for table `materials` */
 
@@ -78,18 +101,26 @@ CREATE TABLE `materials` (
   `SUBJECT_NAME` varchar(20) DEFAULT NULL,
   `STATUS` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`M_ID`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+>>>>>>> origin/master
 
 /*Data for the table `materials` */
 
 insert  into `materials`(`M_ID`,`LOGIN_ID`,`MATERIAL`,`DATE`,`SUBJECT_NAME`,`STATUS`) values 
 (1,1,'test','01-01-22','toc','accepted'),
+<<<<<<< HEAD
 (4,2,'e-commerce.pptx','2022-12-03','ecommerce','accepted'),
 (5,2,'coa_assignment.pdf','2022-12-05','coa','accepted'),
 (7,2,'coa_assignment.pdf','2022-12-05','coa','accepted'),
 (10,2,'e-commerce_1.pptx','2022-12-05','e commerse','accepted'),
 (12,2,'1134259.jpg','2023-01-28','test img','accepted'),
 (13,1,'Hallticket_SFAUBCA037_08-01-2023_1_1.pdf','2023-01-28','sample','pending');
+=======
+(4,2,'e-commerce.pptx','2022-12-03','ecommerce','accepted');
+>>>>>>> origin/master
 
 /*Table structure for table `notification` */
 
@@ -123,6 +154,7 @@ CREATE TABLE `student` (
   `EMAIL_ID` varchar(255) DEFAULT NULL,
   `PLACE` varchar(100) DEFAULT NULL,
   `POST_OFFICE` varchar(100) DEFAULT NULL,
+<<<<<<< HEAD
   `MOBILE_NUMBER` bigint(11) DEFAULT NULL,
   `COLLEGE` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`STUDENT_ID`)
@@ -144,6 +176,19 @@ insert  into `student`(`STUDENT_ID`,`LOGIN_ID`,`FIRST_NAME`,`LAST_NAME`,`GENDER`
 (14,101,'rahul','kk','Male','bca','2023-01-28','rahul@domain.com','vly','kavumpuram',984654351,'safa'),
 (15,102,'rahul','kk','Male','bca','2023-01-28','gmail.com','avd','post',9846543123,'college'),
 (16,103,'cc','ff','Other','v','2023-01-28','f','v','c',8,'v');
+=======
+  `PIN_CODE` varchar(11) DEFAULT NULL,
+  `MOBILE_NUMBER` bigint(11) DEFAULT NULL,
+  `COLLEGE` varchar(300) DEFAULT NULL,
+  PRIMARY KEY (`STUDENT_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+/*Data for the table `student` */
+
+insert  into `student`(`STUDENT_ID`,`LOGIN_ID`,`FIRST_NAME`,`LAST_NAME`,`GENDER`,`DEPARTMENT`,`DOB`,`EMAIL_ID`,`PLACE`,`POST_OFFICE`,`PIN_CODE`,`MOBILE_NUMBER`,`COLLEGE`) values 
+(1,0,'name','name','MALE','BCA','1 2 3','gmail.com','clt','kkd','0',1,'clg'),
+(2,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'0',NULL,NULL);
+>>>>>>> origin/master
 
 /*Table structure for table `teachers` */
 
@@ -164,7 +209,11 @@ CREATE TABLE `teachers` (
   `POST_OFFICE` varchar(100) DEFAULT NULL,
   `PIN_CODE` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`TEACHER_ID`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+>>>>>>> origin/master
 
 /*Data for the table `teachers` */
 
@@ -174,8 +223,12 @@ insert  into `teachers`(`TEACHER_ID`,`FIRST_NAME`,`LAST_NAME`,`QUALIFICATION`,`G
 (4,'ammu','m','mca','male','18-8-2021','cs','ihrd','ammu@gmail.com','8089677890','test','jj','678905'),
 (5,'ammu','mmu','mca','female','23/02/33','bv','ihrd','ammu@gmail.com','8089677890','fdd','dfd','678905'),
 (6,'ammu','mmu','mca','female','mmmmmmm','bv','ihrd','ammu@gmail.com','8089677890','fdd','dfd','678905'),
+<<<<<<< HEAD
 (7,'ammu','mmu','mca','female','2019-11-12','cs','safa','ammu@gmail.com','8089677890','test','dfd','678905'),
 (8,'ammu','m','mca','male','2019-12-11','cs','safa','ammu@gmail.com','8089677890','test','kerala','678905');
+=======
+(7,'ammu','mmu','mca','female','2019-11-12','cs','safa','ammu@gmail.com','8089677890','test','dfd','678905');
+>>>>>>> origin/master
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
